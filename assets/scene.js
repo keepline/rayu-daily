@@ -11,6 +11,17 @@
   button.className = 'scene-switch'; button.type = 'button'; scene.appendChild(button);
   const radio = document.querySelector('.now-playing');
   const motion = matchMedia('(prefers-reduced-motion: reduce)');
+  // Measure the actual monospace advance rather than assuming a viewport width.
+  const measure = document.createElement('canvas').getContext('2d');
+  function fitScene() {
+    measure.font = '100px monospace';
+    const advance = measure.measureText('M').width / 100;
+    pre.style.setProperty('--scene-font', `${scene.clientWidth / (200 * advance)}px`);
+    pre.style.setProperty('--scene-line', `${scene.clientHeight / 72}px`);
+  }
+  new ResizeObserver(fitScene).observe(scene);
+  fitScene();
+  if (document.fonts) document.fonts.ready.then(fitScene);
   let fisher = false, timer;
   const noise = (x,y) => ((x*73+y*137+x*y*19)%101)/101;
   function draw() {
