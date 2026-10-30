@@ -316,10 +316,10 @@ body { background:var(--bg); }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
 
 /* Reference landscapes: a bright woven moon and quiet CRT water. */
-:root { --bg:#090909; --panel:#101010; }
-body,.entry { background:#090909; }
-.sidebar { background:#101010; }
-.landscape { height:clamp(360px,52vw,620px); background:#090909; }
+:root { --bg:#1f1f1f; --panel:#181818; --border:#2a2a2a; --scene-bg:#1f1f1f; }
+html,body,.layout,.content,.entry { background:#1f1f1f; }
+.sidebar { background:#181818; }
+.landscape { height:clamp(360px,52vw,620px); background:#1f1f1f; border-bottom-color:#2a2a2a; }
 #ascii-landscape { /* superseded by fixed 9px grid below */ }
 .pixel-wizard { display:none; }
 .scene-sprite { position:absolute; width:80px; height:64px; left:51.5%; top:30%; image-rendering:pixelated; animation:scene-float 7s ease-in-out infinite; }
@@ -327,7 +327,7 @@ body,.entry { background:#090909; }
 .now-playing { display:flex; align-items:center; gap:12px; max-width:min(330px,65vw); border-radius:24px; background:rgba(5,5,5,.88); border-color:#292929; color:#ddd; font:13px/1.6 Consolas,monospace; backdrop-filter:blur(8px); }
 .now-playing>span { margin:0; }
 .now-playing .track-title { color:#ddd; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.scene-caption { background:#090909e8; padding:8px 12px; left:20px; bottom:16px; }
+.scene-caption { background:#1f1f1fe8; padding:8px 12px; left:20px; bottom:16px; }
 .scene-switch { position:absolute; right:20px; bottom:24px; border:1px solid #444; border-radius:20px; background:#0a0a0a; color:#bbb; padding:7px 12px; font:10px Consolas,monospace; cursor:pointer; }
 @keyframes scene-float { 0%,100% { transform:translate(-50%,0); } 50% { transform:translate(-47%,-8px); } }
 @keyframes scene-glow { from { opacity:.76; } to { opacity:1; } }
@@ -367,3 +367,13 @@ body,.entry { background:#090909; }
 #ascii-landscape { font:9px/9px Consolas,"Courier New",monospace !important; letter-spacing:0 !important; transform:none !important; }
 
 .now-playing .note-icon { color:#e23b2e; }
+
+/* Page night bg — match ref wizard/fisher ~#1f1f1f; kill light edges */
+html { background:#1f1f1f; color-scheme:dark; }
+html, body, .layout, .content, .landscape, .entry {
+  background:#1f1f1f !important;
+}
+.sidebar { background:#181818 !important; }
+.landscape { border-bottom:1px solid #2a2a2a; }
+.scene-caption { background:rgba(31,31,31,.92); }
+.scene-switch { background:#161616; border-color:#333; }
