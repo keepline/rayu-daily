@@ -82,9 +82,8 @@
     const h = rows;
     const moonCx = w * 0.515;
     const moonCy = h * 0.33;
-    const moonR2 = Math.pow(Math.min(w, h) * 0.28, 2);
+    const R = Math.min(w, h) * 0.28;
     const lines = [];
-    const terrain = '/' + String.fromCharCode(92) + '|xo.:';
 
     for (let y = 0; y < h; y++) {
       let row = '';
@@ -94,24 +93,53 @@
         const dy = y - moonCy;
         let c = ' ';
         if (!fisher) {
-          if (dx * dx + dy * dy < moonR2) c = ['w', 'm', '~', 'v'][(x + y * 2) % 4];
+          const r = Math.hypot(dx, dy);
           const ridge =
             h * 0.54 -
             h * 0.14 * Math.abs(Math.sin(x * 0.067)) -
             h * 0.07 * Math.sin(x * 0.173);
           if (y > ridge) {
-            const density = Math.max(0.12, 0.82 - (y - ridge) * 0.019);
-            c = n < density ? terrain.charAt((x * 3 + y * 7) % 7) : ' ';
+            const depth = (y - ridge) / (h - ridge);
+            let terrain;
+            let density;
+            if (depth < 0.12) {
+              terrain = 'X#@';
+              density = 0.85;
+            } else if (depth < 0.45) {
+              terrain = 'xo/';
+              density = 0.55 - 0.20 * (depth - 0.12) / 0.33;
+            } else {
+              terrain = '|' + String.fromCharCode(92) + '.:';
+              density = 0.35 - 0.27 * (depth - 0.45) / 0.55;
+            }
+            c = n < density ? terrain.charAt((x * 3 + y * 7) % terrain.length) : ' ';
+          } else if (n > 0.9985) {
+            c = '.';
           }
-          if (c === ' ' && n > 0.996) c = '.';
+          // Apply the moon last so its hollow center always wins over terrain.
+          if (r < R * 0.42) {
+            c = ' ';
+          } else if (r < R * 0.88) {
+            const t = (r / R - 0.42) / 0.46;
+            const density = 0.55 + 0.35 * Math.sin(Math.PI * t);
+            c = n < density ? 'wm~v'[(x + y * 2) % 4] : ' ';
+          } else if (r < R * 1.05) {
+            c = n < 0.32 ? (x % 2 ? '/' : String.fromCharCode(92)) : ' ';
+          }
         } else {
           const edge = h * 0.26 + h * 0.11 * Math.sin(x * 0.048) + h * 0.08 * Math.sin(x * 0.127);
-          if (y < edge) c = n < 0.78 ? (y % 2 === 0 ? '=' : '.') : ' ';
-          const moonFy = h * 0.125;
-          if (dx * dx + (y - moonFy) * (y - moonFy) < moonR2 * 0.35 && y < h * 0.28 && n < 0.3) c = '-';
           const water = h * 0.76 + h * 0.07 * Math.sin(x * 0.039) + h * 0.04 * Math.sin(x * 0.103);
-          if (y > water) c = n < 0.53 ? (y % 3 === 0 ? '=' : '.') : ' ';
-          if (c === ' ' && n > 0.997) c = '.';
+          if (y < 2) {
+            c = n < 0.95 ? (y % 2 === 0 ? '=' : '-') : ' ';
+          } else if (y < edge) {
+            c = n < 0.78 ? (y % 2 === 0 ? '=' : '.') : ' ';
+          } else if (y > water) {
+            const wt = (y - water) / (h - water);
+            const density = 0.06 + 0.22 * wt * wt;
+            c = n < density ? ((x + y) % 10 === 0 ? '-' : '.') : ' ';
+          } else if (n > 0.9985) {
+            c = '.';
+          }
         }
         row += c;
       }
@@ -131,6 +159,7 @@
 
     radio.replaceChildren();
     const note = document.createElement('span');
+    note.className = 'note-icon';
     note.textContent = '\u266b';
     note.setAttribute('aria-hidden', 'true');
     const track = document.createElement('span');

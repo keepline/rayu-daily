@@ -322,8 +322,8 @@ body,.entry { background:#090909; }
 .landscape { height:clamp(360px,52vw,620px); background:#090909; }
 #ascii-landscape { /* superseded by fixed 9px grid below */ }
 .pixel-wizard { display:none; }
-.scene-sprite { position:absolute; width:140px; height:112px; left:50%; top:28%; image-rendering:pixelated; animation:scene-float 7s ease-in-out infinite; }
-[data-scene=fisher] .scene-sprite { top:66%; left:49%; width:132px; height:106px; }
+.scene-sprite { position:absolute; width:80px; height:64px; left:51.5%; top:30%; image-rendering:pixelated; animation:scene-float 7s ease-in-out infinite; }
+[data-scene=fisher] .scene-sprite { top:74%; left:49%; width:80px; height:64px; }
 .now-playing { display:flex; align-items:center; gap:12px; max-width:min(330px,65vw); border-radius:24px; background:rgba(5,5,5,.88); border-color:#292929; color:#ddd; font:13px/1.6 Consolas,monospace; backdrop-filter:blur(8px); }
 .now-playing>span { margin:0; }
 .now-playing .track-title { color:#ddd; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
@@ -331,13 +331,13 @@ body,.entry { background:#090909; }
 .scene-switch { position:absolute; right:20px; bottom:24px; border:1px solid #444; border-radius:20px; background:#0a0a0a; color:#bbb; padding:7px 12px; font:10px Consolas,monospace; cursor:pointer; }
 @keyframes scene-float { 0%,100% { transform:translate(-50%,0); } 50% { transform:translate(-47%,-8px); } }
 @keyframes scene-glow { from { opacity:.76; } to { opacity:1; } }
-@media(max-width:768px) {  .scene-caption span { display:none; } .scene-caption { font-size:10px; left:8px; } .scene-switch { right:8px; font-size:9px; } .scene-sprite { width:112px;height:90px; } }
+@media(max-width:768px) {  .scene-caption span { display:none; } .scene-caption { font-size:10px; left:8px; } .scene-switch { right:8px; font-size:9px; } .scene-sprite { width:80px;height:64px; } }
 @media(prefers-reduced-motion:reduce) { .scene-sprite { transform:translateX(-50%); } }
 
 /* Fit the scene and diary to the content column, including beside the sidebar. */
 .content { min-width:0; container-type:inline-size; }
 .landscape { width:100%; height:clamp(360px,52cqi,620px); display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:end; gap:8px; padding:0 16px 16px; }
-#ascii-landscape { left:0; top:0; transform:none; width:max-content; max-width:none; height:auto; font:9px/9px Consolas,"Courier New",monospace; letter-spacing:0; white-space:pre; overflow:visible; color:#dedede; animation:scene-glow 8s ease-in-out infinite alternate; }
+#ascii-landscape { left:0; top:0; transform:none; width:max-content; max-width:none; height:auto; font:9px/9px Consolas,"Courier New",monospace; letter-spacing:0; white-space:pre; overflow:visible; color:#dedede; animation:none; }
 .scene-caption,.scene-switch { position:relative; inset:auto; z-index:1; margin:0; }
 .scene-caption { min-width:0; padding:8px; overflow-wrap:anywhere; letter-spacing:1px; }
 .scene-switch { max-width:100%; white-space:normal; }
@@ -365,3 +365,5 @@ body,.entry { background:#090909; }
 /* ascii no-stretch */
 .landscape { overflow:hidden; }
 #ascii-landscape { font:9px/9px Consolas,"Courier New",monospace !important; letter-spacing:0 !important; transform:none !important; }
+
+.now-playing .note-icon { color:#e23b2e; }
