@@ -9,6 +9,7 @@
   <link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
+  <div class="now-playing" aria-label="氛围曲目展示，无音频播放"><span aria-hidden="true">♪</span> night fishing · quiet radio <small>静默电台</small></div>
   <div class="layout">
     <aside class="sidebar" id="sidebar">
       <header class="sidebar-header">
@@ -22,10 +23,15 @@
       </footer>
     </aside>
 
-    <button class="menu-toggle" id="menu-toggle" aria-label="打开目录">☰</button>
+    <button class="menu-toggle" id="menu-toggle" aria-expanded="false" aria-controls="sidebar" aria-label="打开目录">☰</button>
     <div class="scrim" id="scrim" hidden></div>
 
     <main class="content" id="content">
+      <section class="landscape" aria-label="月下群山与乘扫帚的小巫师">
+        <pre id="ascii-landscape" aria-hidden="true"></pre>
+        <div class="pixel-wizard" aria-hidden="true"><i></i></div>
+        <div class="scene-caption">夜色很慢，日子一页一页翻<span> / AFTER HOURS</span></div>
+      </section>
       <article class="entry" id="entry">
         <div class="entry-empty">加载中…</div>
       </article>
@@ -33,6 +39,7 @@
   </div>
 
   <script src="assets/markdown.js" defer></script>
+  <script src="assets/scene.js" defer></script>
   <script src="assets/app.js" defer></script>
 </body>
 </html>
