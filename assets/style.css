@@ -314,3 +314,22 @@ body { background:var(--bg); }
 @keyframes shimmer { from { opacity:.6; } to { opacity:.9; } }
 @media(max-width:768px) { .now-playing { right:12px; top:16px; font-size:10px; padding:6px 9px; } .now-playing small { display:none; } .landscape { height:290px; } .scene-caption { left:20px; font-size:11px; } .entry { padding:28px 22px 60px; } .sidebar-header { padding-top:64px; } }
 @media(prefers-reduced-motion:reduce) { *,*::before,*::after { animation:none!important; transition:none!important; scroll-behavior:auto!important; } }
+
+/* Reference landscapes: a bright woven moon and quiet CRT water. */
+:root { --bg:#090909; --panel:#101010; }
+body,.entry { background:#090909; }
+.sidebar { background:#101010; }
+.landscape { height:clamp(360px,52vw,620px); background:#090909; }
+#ascii-landscape { top:0; width:100%; height:100%; font:clamp(5px,.65vw,10px)/1 monospace; line-height:calc(clamp(360px,52vw,620px) / 72); color:#dedede; overflow:hidden; letter-spacing:0; animation:scene-glow 8s ease-in-out infinite alternate; }
+.pixel-wizard { display:none; }
+.scene-sprite { position:absolute; width:140px; height:112px; left:50%; top:28%; image-rendering:pixelated; animation:scene-float 7s ease-in-out infinite; }
+[data-scene=fisher] .scene-sprite { top:66%; left:49%; width:132px; height:106px; }
+.now-playing { display:flex; align-items:center; gap:12px; max-width:min(330px,65vw); border-radius:24px; background:rgba(5,5,5,.88); border-color:#292929; color:#ddd; font:13px/1.6 Consolas,monospace; backdrop-filter:blur(8px); }
+.now-playing>span { margin:0; }
+.now-playing .track-title { color:#ddd; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.scene-caption { background:#090909e8; padding:8px 12px; left:20px; bottom:16px; }
+.scene-switch { position:absolute; right:20px; bottom:24px; border:1px solid #444; border-radius:20px; background:#0a0a0a; color:#bbb; padding:7px 12px; font:10px Consolas,monospace; cursor:pointer; }
+@keyframes scene-float { 0%,100% { transform:translate(-50%,0); } 50% { transform:translate(-47%,-8px); } }
+@keyframes scene-glow { from { opacity:.76; } to { opacity:1; } }
+@media(max-width:768px) { #ascii-landscape { width:1000px; font-size:8.33px; } .scene-caption span { display:none; } .scene-caption { font-size:10px; left:8px; } .scene-switch { right:8px; font-size:9px; } .scene-sprite { width:112px;height:90px; } }
+@media(prefers-reduced-motion:reduce) { .scene-sprite { transform:translateX(-50%); } }
