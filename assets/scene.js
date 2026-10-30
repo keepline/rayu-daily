@@ -82,7 +82,7 @@
     const h = rows;
     const moonCx = w * 0.515;
     const moonCy = h * 0.33;
-    const R = Math.min(w, h) * 0.28;
+    const Rpx = Math.min(w * CHAR_W, h * CHAR_H) * 0.28;
     const lines = [];
 
     for (let y = 0; y < h; y++) {
@@ -93,7 +93,8 @@
         const dy = y - moonCy;
         let c = ' ';
         if (!fisher) {
-          const r = Math.hypot(dx, dy);
+          // Compensate for taller monospace cells so moon rings are circular in pixels.
+          const rPx = Math.hypot(dx * CHAR_W, dy * CHAR_H);
           const ridge =
             h * 0.54 -
             h * 0.14 * Math.abs(Math.sin(x * 0.067)) -
@@ -117,13 +118,13 @@
             c = '.';
           }
           // Apply the moon last so its hollow center always wins over terrain.
-          if (r < R * 0.42) {
+          if (rPx < Rpx * 0.42) {
             c = ' ';
-          } else if (r < R * 0.88) {
-            const t = (r / R - 0.42) / 0.46;
+          } else if (rPx < Rpx * 0.88) {
+            const t = (rPx / Rpx - 0.42) / 0.46;
             const density = 0.55 + 0.35 * Math.sin(Math.PI * t);
             c = n < density ? 'wm~v'[(x + y * 2) % 4] : ' ';
-          } else if (r < R * 1.05) {
+          } else if (rPx < Rpx * 1.05) {
             c = n < 0.32 ? (x % 2 ? '/' : String.fromCharCode(92)) : ' ';
           }
         } else {
