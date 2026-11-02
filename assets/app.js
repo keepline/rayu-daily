@@ -151,13 +151,22 @@
   function closeSidebar() {
     document.body.classList.remove('sidebar-open');
     els.scrim.hidden = true;
+    els.menuToggle.setAttribute('aria-expanded', 'false');
   }
 
   els.menuToggle.addEventListener('click', function () {
     var open = document.body.classList.toggle('sidebar-open');
     els.scrim.hidden = !open;
+    els.menuToggle.setAttribute('aria-expanded', String(open));
+    if (open) els.search.focus();
   });
   els.scrim.addEventListener('click', closeSidebar);
+  document.addEventListener('keydown', function (event) {
+    if (event.key === 'Escape' && document.body.classList.contains('sidebar-open')) {
+      closeSidebar();
+      els.menuToggle.focus();
+    }
+  });
   els.search.addEventListener('input', function () {
     renderSidebar(els.search.value);
   });
