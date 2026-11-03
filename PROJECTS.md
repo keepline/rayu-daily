@@ -9,6 +9,7 @@
 - [runjia-admin](https://github.com/keepline/runjia-admin) · 润佳后台（私有）
 - [runjia-miniprogram](https://github.com/keepline/runjia-miniprogram) · 润佳小程序（私有）
 - [ai-tech-glossary](https://keepline.github.io/ai-tech-glossary/) · AI 术语小抄 · [仓库](https://github.com/keepline/ai-tech-glossary)
+- [财务领航中心](https://finance-command-center.rayushen.workers.dev) · 央和府装修/还款看板（Workers 公开） · [仓库](https://github.com/keepline/finance-command-center)（私有）
 
 ### 其它 keepline 站点 / 仓库
 
