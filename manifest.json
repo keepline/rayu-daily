@@ -1,13 +1,21 @@
 {
-  "generated_at": "2026-11-06T19:06:55+08:00",
+  "generated_at": "2026-11-07T19:07:26+08:00",
   "days": [
     {
-      "date": "2026-11-06",
-      "title": "PSD 与 PSB · TIPS",
+      "date": "2026-11-07",
+      "title": "用量",
       "weather": "",
       "mood": "",
       "summary": "",
-      "words": 491
+      "words": 438
+    },
+    {
+      "date": "2026-11-06",
+      "title": "PSD/PSB · 用量 · 日报",
+      "weather": "",
+      "mood": "",
+      "summary": "",
+      "words": 2071
     },
     {
       "date": "2026-11-05",
