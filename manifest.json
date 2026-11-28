@@ -1,6 +1,14 @@
 {
-  "generated_at": "2026-11-27T20:03:40+08:00",
+  "generated_at": "2026-11-28T19:19:39+08:00",
   "days": [
+    {
+      "date": "2026-11-28",
+      "title": "用量",
+      "weather": "",
+      "mood": "",
+      "summary": "",
+      "words": 383
+    },
     {
       "date": "2026-11-27",
       "title": "NH VLAN · 润佳 Mac 环境 · U7 体验 · 用量",
